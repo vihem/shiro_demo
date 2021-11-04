@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>editUser</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="workingroom">
+    <div th:replace="include/menu :: menu"></div>
+    
+    <form action="updateUser" method="post">
+        
+        账号: <input type="text" name="name" th:value="${user.name}"><br>
+        密码: <input type="password" name="password" placeholder="留空就表示不修改密码"><br><br>
+        配置角色:<br>
+        <div th:each="res: ${resultVos}" style="text-align:left;width:300px;margin:0 auto;padding-left:50px">
+            <input th:type="checkbox" name="roleIds" th:checked="${res.flag}" th:value="${res.id}" th:text="${res.name}"><br>
+        </div>
+        <br>
+        <input type="hidden" name="id" th:value="${user.id}">
+        <input type="submit" value="修改">
+    </form>
+</div>
+</body>
+</html>

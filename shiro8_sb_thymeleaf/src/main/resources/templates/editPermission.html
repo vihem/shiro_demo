@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" content="text/html">
+    <title>editPermission</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="workingroom">
+    
+    <div th:replace="include/menu :: menu"></div>
+    
+    <div class="addOrEdit">
+        <form th:action="updatePermission" method="post">
+            权限名称: <input type="text" name="name" th:value="${permission.name}" > <br>
+            权限描述: <input type="text" name="desc_" th:value="${permission.desc_}"> <br>
+            权限对应的url: <input type="text" name="url"  th:value="${permission.url}"> <br><br>
+            <input type="hidden" name="id" th:value="${permission.id}">
+            <input type="submit" value="修改">
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:fragment="menu">
+    <div class="menu">
+        <a href="listUser">用户管理</a>
+        <a href="listRole">角色管理</a>
+        <a href="listPermission">权限管理</a>
+    </div>
+</div>
+</body>
+</html>

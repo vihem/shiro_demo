@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <title>editRole</title>
+</head>
+<body>
+<div class="workingroom">
+    <div th:replace="include/menu :: menu"></div>
+    
+    <div class="addOrEdit">
+        <form action="updateRole" method="post">
+              角色名: <input type="text" name="name" th:value="${role.name}"> <br>
+            角色描述: <input type="text" name="desc_" th:value="${role.desc_}"> <br><br>
+            配置权限:<br>
+            <div style="text-align:left;width:300px;margin:0 auto;padding-left:50px">
+                <ul th:each="permission: ${permissions}">
+                    <li th:each="tmpPermission : ${currentPermissions}">
+                        <input type="checkbox" th:checked="${permission.id == tmpPermission.id}" name="permissionIds" th:value="${permission.id}"><span th:text="${permission.name}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <input type="hidden" name="id" th:value="${role.id}">
+            <input type="submit" value="修改">
+        </form>
+    </div>
+</div>
+</body>
+</html>
