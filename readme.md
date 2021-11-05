@@ -2,6 +2,7 @@
 &nbsp;
 
 > **项目GitHub地址：[https://github.com/vihem/shiro_demo](https://github.com/vihem/shiro_demo)** \
+> **项目Gitee地址：[https://gitee.com/vihem/shiro_demo](https://gitee.com/vihem/shiro_demo)** \
 > **CSDN地址：[https://blog.csdn.net/vihem/article/details/121153003](https://blog.csdn.net/vihem/article/details/121153003)** \
 > **本文需要与项目对应学习** \
 > MySQL版本：8.0.22\
