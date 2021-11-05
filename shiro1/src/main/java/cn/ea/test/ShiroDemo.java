@@ -1,5 +1,6 @@
 package cn.ea.test;
 
+import cn.ea.shiro.ShiroUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -31,8 +32,11 @@ public class ShiroDemo {
         } catch (AuthenticationException e) {
             System.out.println("登录失败");
         }
-        System.out.println(subject.isAuthenticated());
-        Assert.assertTrue(subject.isAuthenticated());
+        Assert.assertTrue(subject.isAuthenticated());//断言是否登录 同下：
+        System.out.println("是否已经登录："+(subject.isAuthenticated()?"是":"没有"));
+        // 7. 判断是否拥有 某角色/权限
+        System.out.println("是否有admin角色："+(ShiroUtil.hasRole("admin")?"有的":"没有"));
+        System.out.println("是否有addProduct的权限："+(ShiroUtil.isPermitted("addProduct")?"有":"没有"));
         subject.logout();
     }
 }
