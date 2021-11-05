@@ -10,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * 进行登录的控制器，和 LoginServlet 一样，获取账号密码进行验证，如果成功了就客户端跳转到index,否则就返回login.jsp页面。
+ * 需要注意的是，这里用的是 post 方式
+ */
 @Controller
 @RequestMapping("")
 public class LoginController {

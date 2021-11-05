@@ -28,5 +28,4 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.ea.mapper"/>
     </bean>
-
 </beans>
