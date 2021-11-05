@@ -9,9 +9,6 @@
 > jdk 1.8\
 > idea
 
-
-@[TOC](Shiro 基础学习)
-
 ---
 ### 一、shiro 基本流程
 项目见：[shiro1](https://github.com/vihem/shiro_demo/tree/master/shiro1)
