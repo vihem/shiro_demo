@@ -17,6 +17,21 @@
 3. AuthorizationInfo doGetAuthorizationInfo：授权信息的处理，能进入该函数，表示已经验证了账号信息；在调用其他方法时会进入该函数，比如获取角色、权限信息等；
 4. 可以自定义多个Realm。
 
+**身份认证流程**：
+1. 首先调用 Subject.login(token) 进行登录，其会自动委托给 Security Manager，调用之前必须通过 SecurityUtils.setSecurityManager() 设置；
+2. SecurityManager 负责真正的身份验证逻辑，它会委托给 Authenticator 进行身份验证；
+3. Authenticator 才是真正的身份验证者，Shiro API 中核心的身份认证入口点，此处可以自定义插入自己的实现；
+4. Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认 ModularRealmAuthenticator 会调用 AuthenticationStrategy 进行多 Realm 身份验证；
+5. Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返回 / 抛出异常表示身份验证成功了。此处可以配置多个 Realm，将按照相应的顺序及策略进行访问。
+
+**身份验证的步骤**：
+1. 收集用户身份/凭证，即如用户名/密码；
+2. 调用 Subject.login 进行登录，如果失败将得到相应的 AuthenticationException 异常，根据异常提示用户错误信息；否则登录成功；
+3. 最后调用 Subject.logout 进行退出操作。
+   如上测试的几个问题：
+   用户名 / 密码硬编码在 ini 配置文件，以后需要改成如数据库存储，且密码需要加密存储；
+   用户身份 Token 可能不仅仅是用户名 / 密码，也可能还有其他的，如登录时允许用户名 / 邮箱 / 手机号同时登录。
+
 ### 三、shiro3 md5加密 -- 见 shiro3
 1. 使用了两个 realm：
     1. DatabaseRealm：把用户通过 UsernamePasswordToken 传进来的密码，以及数据库里取出来的 salt 进行加密，加密之后再与数据库里的密文进行比较，判断用户是否能够通过验证。
