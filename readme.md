@@ -1,5 +1,5 @@
 
-## shiro_demo
+## Shiro 基础知识
 
 ### 一、shiro 基本流程
 1. 获取 SecurityManager 的工厂：Factory<SecurityManager> factory = ...;
