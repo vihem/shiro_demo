@@ -42,6 +42,7 @@ public class DatabaseRealm extends AuthorizingRealm {
         // UsernamePasswordToken token1 = (UsernamePasswordToken) token;
         // token1.getUsername(); // new String(token1.getPassword());
         
+        //把用户通过 UsernamePasswordToken 传进来的密码，以及数据库里取出来的 salt 进行加密，加密之后再与数据库里的密文进行比较，判断用户是否能够通过验证。
         // 2. 获取 数据库的密码
         User user = new Dao().getUser(username);
         String dbPwd = user.getPassword();

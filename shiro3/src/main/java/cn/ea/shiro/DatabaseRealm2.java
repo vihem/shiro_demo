@@ -19,6 +19,7 @@ public class DatabaseRealm2 extends AuthorizingRealm {
     @Override
     public String getName(){return "databaseRealm2";}
     
+    //授权信息
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         // 能进入这里，表示账号已经通过验证了
@@ -35,6 +36,7 @@ public class DatabaseRealm2 extends AuthorizingRealm {
         return info;
     }
 
+    //身份验证信息
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println(this.getCredentialsMatcher());

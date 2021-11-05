@@ -11,20 +11,21 @@ import org.junit.Assert;
 
 public class ShiroDemo {
     public static void main(String[] args) {
-        //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager 
+        // 1. 获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager 
         //      SecurityManager---->Factory
         Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
-        //2、得到SecurityManager实例 并绑定给SecurityUtils
+        // 2. 从工厂中获取 SecurityManager 的实例
         SecurityManager securityManager = factory.getInstance();//ctrl+alt+v：快速生成变量及对应的数据类型
+        // 3. 把 securityManager 实例绑定到全局 SecurityUtils
         SecurityUtils.setSecurityManager(securityManager);//当前用户：Subject--->SecurityUtils
 
-        //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
+        // 4. 获取当前 主体(subject)/用户
         Subject subject = SecurityUtils.getSubject();//当前用户
-        //  通过UsernamePasswordToken来模拟html/jsp传递过来的用户名与密码
-        UsernamePasswordToken token = new UsernamePasswordToken("zhang3","12345");
+        // 5. 对传进来的用户名/密码进行UsernamePasswordToken封装(创建用户名/密码身份验证Token（即用户身份/凭证）)
+        UsernamePasswordToken token = new UsernamePasswordToken("zhang3","12345");//通过UsernamePasswordToken来模拟html/jsp传递过来的用户名与密码
         //  通过shiro来判断用户是否登录成功;ctrl+alt+t
         try {
-            //4、登录，即身份验证
+            //6. 通过shiro进行登录,即身份验证
             subject.login(token);
             System.out.println("登录成功");
         } catch (AuthenticationException e) {

@@ -1,7 +1,8 @@
 
 ## Shiro 基础知识
+项目GitHub地址：[https://github.com/vihem/shiro_demo.git](https://github.com/vihem/shiro_demo.git)
 
-### 一、shiro 基本流程
+### 一、shiro 基本流程 -- 见 shiro1
 1. 获取 SecurityManager 的工厂：Factory<SecurityManager> factory = ...;
 2. 从工厂中获取 SecurityManager 的实例：SecurityManager securityManager = factory.getInstance();
 3. 把 securityManager 实例绑定到全局 SecurityUtils：SecurityUtils.setSecurityManager(securityManager);
@@ -10,15 +11,28 @@
 6. 通过shiro进行登录：subject.login(token)
 7. 判断是否拥有 某角色/权限：subject.hasRole(role);/subject.isPermitted(permit);
 
-### 二、Realm 
+### 二、Realm -- 见 shiro2
 1. 继承 AuthorizingRealm，并继承里面的两个方法；
 2. AuthenticationInfo doGetAuthenticationInfo：认证信息的处理，调用 subject.login(token); 时，进入该函数；
 3. AuthorizationInfo doGetAuthorizationInfo：授权信息的处理，能进入该函数，表示已经验证了账号信息；在调用其他方法时会进入该函数，比如获取角色、权限信息等；
 4. 可以自定义多个Realm。
 
-### 三、shiro3 md5加密
-1. 使用了两个 realm
+### 三、shiro3 md5加密 -- 见 shiro3
+1. 使用了两个 realm：
+    1. DatabaseRealm：把用户通过 UsernamePasswordToken 传进来的密码，以及数据库里取出来的 salt 进行加密，加密之后再与数据库里的密文进行比较，判断用户是否能够通过验证。
+    2. DatabaseRealm2：身份验证时直接把盐salt/md5一起放入了 SimpleAuthenticationInfo，使用Shiro提供的 HashedCredentialsMatcher 进行验证。
+2. 修改了shiro.ini
+```ini
+[main]
+credentialsMatcher=org.apache.shiro.authc.credential.HashedCredentialsMatcher
+credentialsMatcher.hashAlgorithmName=md5
+credentialsMatcher.hashIterations=2
+credentialsMatcher.storedCredentialsHexEncoded=true
 
+databaseRealm=cn.ea.shiro.DatabaseRealm2
+databaseRealm.credentialsMatcher=$credentialsMatcher
+securityManager.realms=$databaseRealm
+```
 ### 四、shiro4_web：shiro 与 web 的搭配
 1. 在shiro.ini中配置哪些url链接需要哪些角色/权限，以及无权限/角色的跳转
     1. [main]: 
